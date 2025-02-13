@@ -7,6 +7,7 @@ function generatedToken(admin) {
     username: admin.username,
     email: admin.email,
     phone: admin.phone,
+    type: admin.type,
     // isAdmin: admin.isAdmin,
   };
   console.log("payload for Admin", payload);
@@ -19,6 +20,20 @@ async function getAdmin(req, res, next) {
   try {
     const allAdmin = await Admin.find();
     res.status(201).json(allAdmin);
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function getUserM(req, res, next) {
+  try {
+    let user = { type: "resident" };
+    console.log(user);
+
+    const allUserM = await Admin.find(user);
+    console.log("resident", allUserM);
+
+    res.status(200).json(allUserM);
   } catch (error) {
     next(error);
   }
@@ -56,6 +71,7 @@ async function loginAdmin(req, res, next) {
 
 module.exports = {
   getAdmin,
+  getUserM,
   signUpAdmin,
   loginAdmin,
 };

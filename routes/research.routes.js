@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   getAllResearch,
   getResearchByCategory,
+  getResearchChart,
   pendingForms,
   createResearch,
   getOneResearch,
@@ -10,6 +11,8 @@ const {
 } = require("../controllers/research.Control");
 const { fileUpload } = require("../middleware/uploads");
 router.get("/", getAllResearch);
+
+router.get("/chart", getResearchChart);
 //get one research by id
 router.get("/:id", getOneResearch);
 //get all research by category

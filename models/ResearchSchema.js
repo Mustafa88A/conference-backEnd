@@ -6,6 +6,11 @@ const Research = new Schema({
     type: String,
     require: true,
   },
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: "category",
+    require: true,
+  },
   nameOfResearch: {
     type: String,
     require: true,
@@ -49,8 +54,8 @@ const Research = new Schema({
         validate: {
           validator: function (value) {
             // تحقق إذا كان إما بريد إلكتروني أو رقم هاتف
-            const emailRegex = /^\S+@\S+\.\S+$/;
             const phoneRegex = /^\d{11}$/; // رقم هاتف مكون من 11 رقمًا
+            const emailRegex = /^\S+@\S+\.\S+$/;
             return emailRegex.test(value) || phoneRegex.test(value);
           },
           message: "coaction must be a valid email or phone number",
@@ -67,12 +72,7 @@ const Research = new Schema({
   status: {
     type: String,
     default: "pending",
-    //"approved", "rejected"
-  },
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: "category",
-    require: true,
+    enum: ["pending", "approved", "rejected"],
   },
 });
 

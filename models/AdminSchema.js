@@ -19,8 +19,9 @@ const Admin = new Schema({
     min: 4,
     mix: 12,
   },
-  isAdmin: {
+  type: {
     type: String,
+    enum: ["superAdmin", "resident"],
   },
 });
 
